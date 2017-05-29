@@ -2,8 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './test-redux.js',
-  output: { path: __dirname, filename: 'bundle.js' },
+  entry: './src/main.js',
+  output: { path: __dirname, filename: './src/bundle.js' },
   module: {
     loaders: [
       {

@@ -1,7 +1,7 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
-const delegateTodoReducer = (todo, action) =>{
+const todoReducerObj = (todo, action) =>{
   switch (action.type) {
     case 'ADD_TODO':
       return {
@@ -24,16 +24,16 @@ const delegateTodoReducer = (todo, action) =>{
   }
 };
 
-const todoReducer = (state = [], action) =>{
+const todoReducerList = (state = [], action) =>{
   switch (action.type) {
     case 'ADD_TODO':
       return [
         ...state,
-        delegateTodoReducer(undefined, action)
+        todoReducerObj(undefined, action)
       ];
     case 'TOGGLE_TODO':
       return state.map(todo => {
-        return delegateTodoReducer(todo, action)
+        return todoReducerObj(todo, action)
       });
     default:
       return state;
@@ -60,7 +60,7 @@ const testAddTodo = () => {
   deepFreeze(action);
 
   expect(
-    todoReducer(stateBefore, action)
+    todoReducerList(stateBefore, action)
   ).toEqual(stateAfter);
 };
 
@@ -99,7 +99,7 @@ const testToggleTodo = () => {
   deepFreeze(action);
 
   expect(
-    todoReducer(stateBefore, action)
+    todoReducerList(stateBefore, action)
   ).toEqual(stateAfter);
 }
 
