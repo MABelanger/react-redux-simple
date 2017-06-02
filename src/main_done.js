@@ -7,7 +7,7 @@ import React from 'react';
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
 // Need to npm i --save react-redux
-import { Provider2, connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
 const todo = (state = {}, action) => {
   switch (action.type) {
@@ -112,10 +112,7 @@ const getVisibleTodos = (
 }
 
 let nextTodoId = 0;
-let AddTodo = ( props, context ) => {
-
-  console.log('context', context);
-  debugger;
+let AddTodo = ( { dispatch } ) => {
   let myInput;
   return (
   <div>
@@ -123,7 +120,7 @@ let AddTodo = ( props, context ) => {
       myInput = node;
     }}/>
     <button onClick={() => {
-      context.store.dispatch({
+      dispatch({
         type: 'ADD_TODO',
         id: nextTodoId++,
         text: myInput.value
@@ -134,10 +131,6 @@ let AddTodo = ( props, context ) => {
     </button>
   </div>
 )};
-
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-}
 // Generate a container component that does not subscribe to the store
 // but pass dispatch to the component that it wrap 'AddTodo'
 // Default behaviour without argument () is to not connect to the store and only
@@ -243,21 +236,6 @@ const TodoApp = () => (
     <Footer />
   </div>
 );
-
-
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    }
-  }
-  render() {
-    return this.props.children;
-  }
-}
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-}
 
 const render = () => {
   ReactDOM.render(
