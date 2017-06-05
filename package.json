@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node node_modules/babel-cli/bin/babel-node.js node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors"
   },
   "author": "Michel-Alexandre Belanger <michel.alexandre.belaner@gmail.com> (http://mtrema.com/)",
   "license": "MIT",

@@ -1,12 +1,9 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
-import { createStore } from 'redux';
-import { combineReducers } from 'redux';
-import React from 'react';
-import { Component } from 'react';
+import { createStore, combineReducers } from 'redux';
+import { React, Component } from 'react';
 import ReactDOM from 'react-dom';
-// Need to npm i --save react-redux
 import { Provider, connect } from 'react-redux';
 
 const todo = (state = {}, action) => {
